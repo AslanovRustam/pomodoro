@@ -1,34 +1,35 @@
-.taskContainer {
+.Modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.formtStyle {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 200px;
+  max-width: 600px;
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.formContainer {
-  width: 310px;
-  height: 150px;
-  margin-top: 50px;
-}
-
 .input,
 .textArea {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  /* margin: 5px; */
-  height: 31px;
-  width: 100%;
-  padding: 20px;
-  outline: none;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid rgb(24, 21, 218);
   border-radius: 5px;
-  border: 1px solid #cacaca;
 }
-.textArea {
-  padding: 10px;
-  height: 100px;
-}
-
-.buttonAdd {
+.buttonEdit {
   margin-top: 20px;
   height: 40px;
   width: 100%;
@@ -40,7 +41,7 @@
   cursor: pointer;
   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-.buttonAdd:hover,
-.buttonAdd:focus {
+.buttonEdit:hover,
+.buttonEdit:focus {
   background-color: #303f9f;
 }
