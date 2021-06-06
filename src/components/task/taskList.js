@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import s from "./task.module.css";
 import Modal from "../modal/modal";
 import initialTasks from "../tasks.json";
@@ -74,6 +75,9 @@ export default function TaskList() {
   return (
     <>
       <div className={s.taskListContainer}>
+        <NavLink to="/" exact>
+          <button type="button">Назад</button>
+        </NavLink>
         <div className={s.addTaskContainer}>
           <form>
             <input

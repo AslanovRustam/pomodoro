@@ -1,13 +1,16 @@
 import { useState } from "react";
+import s from "./timer.module.css";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function Timer() {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
 
   const [interv, setInterv] = useState();
   const [status, setStatus] = useState(0);
 
-  const [initialMin, setInitialMin] = useState(20);
+  const [initialMin, setInitialMin] = useState(25);
   const [initialSec, setInitialSec] = useState(0);
 
   const start = () => {
@@ -25,7 +28,7 @@ export default function Timer() {
       updatedS = 60;
     }
     if (updatedM === -1) {
-      setStatus(0);
+      setStatus(2);
       setMinutes(0);
       return;
     }
@@ -48,112 +51,62 @@ export default function Timer() {
   const resume = () => start();
 
   return (
-    <div className="main-section">
-      <div className="clock-holder">
-        <div className="stopwatch">
+    <div className={s.timerCotainer}>
+      <div className={s.timerProgressContainer}>
+        <CircularProgressbar
+          value={minutes}
+          maxValue={initialMin}
+          minValue={initialSec}
+          counterClockwise={true}
+          styles={buildStyles({
+            rotation: 1,
+            strokeLinecap: "butt",
+            pathTransitionDuration: 0.5,
+            pathColor: "#d6d6d6",
+            textColor: "#f88",
+            trailColor: `rgba(255, 136, 136)`,
+            backgroundColor: "#3e98c7",
+          })}
+          text={`${minutes}:${seconds >= 10 ? seconds : "0" + seconds}`}
+        />
+      </div>
+      <div className={s.timerBtnContainer}>
+        {status === 0 ? (
           <div>
-            <span>{minutes >= 10 ? minutes : "0" + minutes}:</span>
-            <span>{seconds >= 10 ? seconds : "0" + seconds}</span>
+            <button className={s.timerBtn} onClick={start}>
+              Start
+            </button>
           </div>
+        ) : (
+          ""
+        )}
+
+        {status === 1 ? (
           <div>
-            {status === 0 ? <button onClick={start}>Start</button> : ""}
-
-            {status === 1 ? (
-              <div>
-                <button onClick={stop}>Stop</button>
-                <button onClick={reset}>Reset</button>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {status === 2 ? (
-              <div>
-                <button onClick={resume}>Resume</button>
-                <button onClick={reset}>Reset</button>
-              </div>
-            ) : (
-              ""
-            )}
+            <button className={s.timerBtn} onClick={stop}>
+              Stop
+            </button>
+            <button className={s.timerResetBtn} onClick={reset}>
+              Reset
+            </button>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
+
+        {status === 2 ? (
+          <div>
+            <button className={s.timerBtn} onClick={resume}>
+              Resume
+            </button>
+            <button className={s.timerResetBtn} onClick={reset}>
+              Reset
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
 }
-
-// import { useState } from "react";
-
-// export default function Timer() {
-//   const [minutes, setMinutes] = useState(0);
-//   const [seconds, setSeconds] = useState(0);
-
-//   const [interv, setInterv] = useState();
-//   const [status, setStatus] = useState(0);
-
-//   const start = () => {
-//     run();
-//     setStatus(1);
-//     setInterv(setInterval(run, 1000));
-//   };
-
-//   let updatedS = seconds;
-//   let updatedM = minutes;
-
-//   const run = () => {
-//     if (updatedS === 60) {
-//       updatedM++;
-//       updatedS = 0;
-//     }
-//     updatedS++;
-//     return setMinutes(updatedM), setSeconds(updatedS);
-//   };
-
-//   const stop = () => {
-//     clearInterval(interv);
-//     setStatus(2);
-//   };
-
-//   const reset = () => {
-//     clearInterval(interv);
-//     setStatus(0);
-//     setMinutes(0);
-//     setSeconds(0);
-//   };
-
-//   const resume = () => start();
-
-//   return (
-//     <div className="main-section">
-//       <div className="clock-holder">
-//         <div className="stopwatch">
-//           <div>
-//             <span>{minutes >= 10 ? minutes : "0" + minutes}:</span>
-//             <span>{seconds >= 10 ? seconds : "0" + seconds}</span>
-//           </div>
-//           <div>
-//             {status === 0 ? <button onClick={start}>Start</button> : ""}
-
-//             {status === 1 ? (
-//               <div>
-//                 <button onClick={stop}>Stop</button>
-//                 <button onClick={reset}>Reset</button>
-//               </div>
-//             ) : (
-//               ""
-//             )}
-
-//             {status === 2 ? (
-//               <div>
-//                 <button onClick={resume}>Resume</button>
-//                 <button onClick={reset}>Reset</button>
-//               </div>
-//             ) : (
-//               ""
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
