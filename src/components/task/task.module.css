@@ -8,13 +8,17 @@
   height: 150px;
   margin-top: 50px;
 }
-
+.addTaskContainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
 .input,
 .textArea {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   /* margin: 5px; */
   height: 31px;
   width: 100%;
@@ -25,7 +29,7 @@
 }
 .textArea {
   padding: 10px;
-  height: 100px;
+  height: 50px;
 }
 
 .buttonAdd,
@@ -80,6 +84,15 @@
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .input,
+  .textArea,
+  .taskName,
+  .taskDescription {
+    font-size: 16px;
+  }
 }
 
 @media screen and (min-width: 768px) {

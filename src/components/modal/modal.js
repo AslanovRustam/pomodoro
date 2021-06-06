@@ -1,30 +1,18 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
-import shortid from "shortid";
 import s from "./modal.module.css";
 
 const modalRoot = document.querySelector("#modal-root");
 
-export default function Modal({ onClose, task }) {
+export default function Modal({ onClose, task, editTask }) {
   const [name, setName] = useState(task ? task.name : "");
   const [description, setDescription] = useState(task ? task.description : "");
 
-  const generateId = shortid.generate();
-
-  const newTask = { id: generateId, name, description };
-  // {
-  //   task ? { id, name, description } : { id: generateId, name, description };
-  // }
-
-  const reset = () => {
-    setName("");
-    setDescription("");
-  };
+  const newTask = { id: task.id, name: name, description: description };
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    reset();
-    onClose(newTask);
+    editTask(newTask);
   };
   const handleBackdropClick = (event) => {
     if (event.currentTarget === event.target) {

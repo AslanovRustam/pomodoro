@@ -8,8 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState(initialTasks);
-  //   const [tasks, setTasks] = useState(initialTasks);
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [showModal, setShowmodal] = useState(false);
@@ -35,21 +33,6 @@ export default function TaskList() {
     setShowmodal(!showModal);
     setCurrentPost(task);
     console.log("task in toggle", task);
-    // setTasks(
-    //   tasks.map((item) => {
-    //     if (item.id === task.id) {
-    //       console.log("item.id", item.id);
-    //       console.log("task.id", task.id);
-
-    //       return {
-    //         ...item,
-    //         name: name,
-    //         description: description,
-    //       };
-    //     }
-    //     return item;
-    //   })
-    // );
   };
   const newTask = {
     id: shortid.generate(),
@@ -65,15 +48,33 @@ export default function TaskList() {
       setTasks([task, ...tasks]);
       setName("");
       setDescription("");
+      return;
     }
 
     notify();
   };
 
+  const editTask = (updTask) => {
+    setTasks(
+      tasks.map((task) => {
+        if (updTask.id === task.id) {
+          return (task = {
+            id: task.id,
+            name: updTask.name,
+            description: updTask.description,
+          });
+        }
+        return task;
+      })
+    );
+
+    setShowmodal(!showModal);
+  };
+
   return (
     <>
       <div className={s.taskListContainer}>
-        <div>
+        <div className={s.addTaskContainer}>
           <form>
             <input
               className={s.input}
@@ -104,12 +105,13 @@ export default function TaskList() {
         <ul>
           {parsedTasks.map((task) => (
             <li key={task.id} className={s.taskContainer}>
-              <h1>{task.name}</h1>
-              <span>{task.description}</span>
+              <h1 className={s.taskName}>{task.name}</h1>
+              <span className={s.taskDescription}>{task.description}</span>
               <button
                 className={s.buttonEdit}
                 type="button"
                 onClick={() => toggleModal(task)}
+                // onClick={() => editTask(task)}
               >
                 Edit
               </button>
@@ -124,7 +126,14 @@ export default function TaskList() {
           ))}
         </ul>
       </div>
-      {showModal && <Modal onClose={toggleModal} task={currentPost} />}
+      {showModal && (
+        <Modal
+          onClose={toggleModal}
+          task={currentPost}
+          editTask={editTask}
+          addTask={addTask}
+        />
+      )}
       <ToastContainer
         position="top-center"
         autoClose={5000}
