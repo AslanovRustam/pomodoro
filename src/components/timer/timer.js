@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import s from "./timer.module.css";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -51,62 +52,69 @@ export default function Timer() {
   const resume = () => start();
 
   return (
-    <div className={s.timerCotainer}>
-      <div className={s.timerProgressContainer}>
-        <CircularProgressbar
-          value={minutes}
-          maxValue={initialMin}
-          minValue={initialSec}
-          counterClockwise={true}
-          styles={buildStyles({
-            rotation: 1,
-            strokeLinecap: "butt",
-            pathTransitionDuration: 0.5,
-            pathColor: "#d6d6d6",
-            textColor: "#f88",
-            trailColor: `rgba(255, 136, 136)`,
-            backgroundColor: "#3e98c7",
-          })}
-          text={`${minutes}:${seconds >= 10 ? seconds : "0" + seconds}`}
-        />
-      </div>
-      <div className={s.timerBtnContainer}>
-        {status === 0 ? (
-          <div>
-            <button className={s.timerBtn} onClick={start}>
-              Start
-            </button>
+    <>
+      <div className={s.timerSection}>
+        <NavLink to="/addtask" exact className={s.timerBtnAdd}>
+          Add Task
+        </NavLink>
+        <div className={s.timerCotainer}>
+          <div className={s.timerProgressContainer}>
+            <CircularProgressbar
+              value={minutes}
+              maxValue={initialMin}
+              minValue={initialSec}
+              counterClockwise={true}
+              styles={buildStyles({
+                rotation: 1,
+                strokeLinecap: "butt",
+                pathTransitionDuration: 0.5,
+                pathColor: "#d6d6d6",
+                textColor: "#f88",
+                trailColor: `rgba(255, 136, 136)`,
+                backgroundColor: "#3e98c7",
+              })}
+              text={`${minutes}:${seconds >= 10 ? seconds : "0" + seconds}`}
+            />
           </div>
-        ) : (
-          ""
-        )}
+          <div className={s.timerBtnContainer}>
+            {status === 0 ? (
+              <div>
+                <button className={s.timerBtn} onClick={start}>
+                  Start
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
 
-        {status === 1 ? (
-          <div>
-            <button className={s.timerBtn} onClick={stop}>
-              Stop
-            </button>
-            <button className={s.timerResetBtn} onClick={reset}>
-              Reset
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
+            {status === 1 ? (
+              <div>
+                <button className={s.timerBtn} onClick={stop}>
+                  Stop
+                </button>
+                <button className={s.timerResetBtn} onClick={reset}>
+                  Reset
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
 
-        {status === 2 ? (
-          <div>
-            <button className={s.timerBtn} onClick={resume}>
-              Resume
-            </button>
-            <button className={s.timerResetBtn} onClick={reset}>
-              Reset
-            </button>
+            {status === 2 ? (
+              <div>
+                <button className={s.timerBtn} onClick={resume}>
+                  Resume
+                </button>
+                <button className={s.timerResetBtn} onClick={reset}>
+                  Reset
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
-        ) : (
-          ""
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import s from "./task.module.css";
 import Modal from "../modal/modal";
 import initialTasks from "../tasks.json";
@@ -8,16 +8,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function TaskList() {
-  const [tasks, setTasks] = useState(initialTasks);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [showModal, setShowmodal] = useState(false);
   const [currentPost, setCurrentPost] = useState("");
 
-  window.localStorage.setItem("tasks", JSON.stringify(tasks));
   const localTasks = window.localStorage.getItem("tasks");
   const parsedTasks = JSON.parse(localTasks);
-  console.log("currentPost", currentPost);
+  console.log("parsedTasks", parsedTasks);
+  const [tasks, setTasks] = useState(
+    parsedTasks === null ? initialTasks : parsedTasks
+  );
+  window.localStorage.setItem("tasks", JSON.stringify(tasks));
 
   const notify = () =>
     toast.error("Please, fill in name and description of your new task", {
@@ -75,47 +77,36 @@ export default function TaskList() {
   return (
     <>
       <div className={s.taskListContainer}>
-        <NavLink to="/" exact>
-          <button type="button">Назад</button>
-        </NavLink>
-        <div className={s.addTaskContainer}>
-          <form>
-            <input
-              className={s.input}
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.currentTarget.value)}
-              placeholder="Name"
-            />
-            <textarea
-              className={s.textArea}
-              rows="5"
-              type="text"
-              name="description"
-              value={description}
-              onChange={(e) => setDescription(e.currentTarget.value)}
-              placeholder="Description"
-            ></textarea>
-          </form>
-          <button
-            className={s.buttonAdd}
-            type="button"
-            onClick={() => addTask(newTask)}
-          >
-            Add Task
-          </button>
+        <div className={s.navBtn}>
+          <NavLink to="/" exact>
+            <button className={s.backBtn} type="button">
+              Back to Home
+            </button>
+          </NavLink>
+          <NavLink to="/addtask" exact>
+            <button className={s.backBtn} type="button">
+              Add Task
+            </button>
+          </NavLink>
         </div>
         <ul>
-          {parsedTasks.map((task) => (
+          {tasks.map((task) => (
             <li key={task.id} className={s.taskContainer}>
-              <h1 className={s.taskName}>{task.name}</h1>
-              <span className={s.taskDescription}>{task.description}</span>
+              <div className={s.taskInfo}>
+                <div>
+                  <h1 className={s.taskName}>{task.name}</h1>
+                  <span className={s.taskDescription}>{task.description}</span>
+                </div>
+                <Link to={`/tasks/${task.id}`} exact className={s.menuLink}>
+                  <button className={s.startBtn} type="button">
+                    Start
+                  </button>
+                </Link>
+              </div>
               <button
                 className={s.buttonEdit}
                 type="button"
                 onClick={() => toggleModal(task)}
-                // onClick={() => editTask(task)}
               >
                 Edit
               </button>

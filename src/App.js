@@ -1,9 +1,10 @@
 import { Switch, Route } from "react-router-dom";
-
 import Header from "./components/header/header";
-// import Task from "./components/task/task";
 import TaskList from "./components/task/taskList";
+import Task from "./components/task/task";
 import Timer from "./components/timer/timer";
+import AddTask from "./components/addtask/addtask";
+import Settings from "./components/settings/settings";
 
 function App() {
   return (
@@ -14,10 +15,17 @@ function App() {
         <Route path="/" exact>
           <Timer />
         </Route>
-
-        {/* <Task /> */}
+        <Route path="/addtask">
+          <AddTask />
+        </Route>
         <Route path="/tasks" exact>
           <TaskList />
+        </Route>
+        <Route path="/tasks/:taskid">
+          <Task />
+        </Route>
+        <Route path="/settings">
+          <Settings />
         </Route>
       </Switch>
     </>
