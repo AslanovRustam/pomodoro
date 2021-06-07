@@ -73,6 +73,21 @@ export default function TaskList() {
 
     setShowmodal(!showModal);
   };
+  const toggleCompleted = (toggledTusk) => {
+    setTasks(
+      tasks.map((task) => {
+        if (toggledTusk.id === task.id) {
+          return (task = {
+            id: task.id,
+            name: task.name,
+            description: task.description,
+            checked: !task.checked,
+          });
+        }
+        return task;
+      })
+    );
+  };
 
   return (
     <>
@@ -96,6 +111,11 @@ export default function TaskList() {
                 <div>
                   <h1 className={s.taskName}>{task.name}</h1>
                   <span className={s.taskDescription}>{task.description}</span>
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleCompleted(task)}
+                  ></input>
                 </div>
                 <Link to={`/tasks/${task.id}`} exact className={s.menuLink}>
                   <button className={s.startBtn} type="button">

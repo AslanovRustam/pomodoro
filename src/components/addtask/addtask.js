@@ -33,6 +33,7 @@ export default function TaskList() {
     id: shortid.generate(),
     name,
     description,
+    checked: false,
   };
 
   const addTask = (task) => {

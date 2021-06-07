@@ -1,12 +1,14 @@
 [
   {
     "id": "1",
-    "name": "Start learning typescript",
-    "description": "Watch tutorial"
+    "name": "Get a job in Clickable ",
+    "description": "Do a test task",
+    "checked": false
   },
   {
     "id": "2",
     "name": "Improve the level of english",
-    "description": "Sign up for courses"
+    "description": "Sign up for courses",
+    "checked": false
   }
 ]

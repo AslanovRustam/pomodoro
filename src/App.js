@@ -5,12 +5,12 @@ import Task from "./components/task/task";
 import Timer from "./components/timer/timer";
 import AddTask from "./components/addtask/addtask";
 import Settings from "./components/settings/settings";
+import NotFoundView from "./components/notfoundview";
 
 function App() {
   return (
     <>
       <Header />
-
       <Switch>
         <Route path="/" exact>
           <Timer />
@@ -26,6 +26,9 @@ function App() {
         </Route>
         <Route path="/settings">
           <Settings />
+        </Route>
+        <Route>
+          <NotFoundView />
         </Route>
       </Switch>
     </>
