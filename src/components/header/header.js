@@ -7,7 +7,7 @@ export default function Header() {
   const [menuActive, setMenuActive] = useState(false);
   return (
     <>
-      <div id="header" className={s.burgerMenuContainer}>
+      <header id="header" className={s.burgerMenuContainer}>
         <nav>
           <div
             className={s.burgerBtn}
@@ -17,7 +17,7 @@ export default function Header() {
           </div>
         </nav>
         <Menu active={menuActive} setActive={setMenuActive} />
-      </div>
+      </header>
     </>
   );
 }

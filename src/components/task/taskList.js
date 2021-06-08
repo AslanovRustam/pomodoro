@@ -6,6 +6,7 @@ import initialTasks from "../tasks.json";
 import shortid from "shortid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Task from "./task";
 
 export default function TaskList() {
   const [name, setName] = useState("");
@@ -107,21 +108,25 @@ export default function TaskList() {
         <ul>
           {tasks.map((task) => (
             <li key={task.id} className={s.taskContainer}>
+              {/* <Task currentItem={task} toggleCompleted={toggleCompleted} /> */}
               <div className={s.taskInfo}>
                 <div>
                   <h1 className={s.taskName}>{task.name}</h1>
                   <span className={s.taskDescription}>{task.description}</span>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => toggleCompleted(task)}
-                  ></input>
                 </div>
-                <Link to={`/tasks/${task.id}`} exact className={s.menuLink}>
-                  <button className={s.startBtn} type="button">
-                    Start
-                  </button>
-                </Link>
+                <div className={s.statusContainer}>
+                  <input
+                    className={s.checked}
+                    type="checkbox"
+                    checked={task.checked}
+                    onChange={() => toggleCompleted(task)}
+                  />
+                  <Link to={`/tasks/${task.id}`} exact className={s.menuLink}>
+                    <button className={s.startBtn} type="button">
+                      Start
+                    </button>
+                  </Link>
+                </div>
               </div>
               <button
                 className={s.buttonEdit}

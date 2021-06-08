@@ -63,3 +63,21 @@
   margin-bottom: 10px;
   color: #0a7212;
 }
+
+.backBtn {
+  margin-top: 5px;
+  height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #cacaca;
+  background-color: #3f51b5;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.backBtn:hover,
+.backBtn:focus {
+  background-color: #303f9f;
+}

@@ -9,6 +9,12 @@ export default function Settings() {
   const [initialMin, setInitialMin] = useState(parsedMinutes);
   window.localStorage.setItem("minutes", JSON.stringify(initialMin));
 
+  const localBreakMinutes = window.localStorage.getItem("break");
+  const parsedBreakMinutes = JSON.parse(localBreakMinutes);
+
+  const [initialBreakMin, setInitialBreakMin] = useState(parsedBreakMinutes);
+  window.localStorage.setItem("break", JSON.stringify(initialBreakMin));
+
   const handleSubmitForm = (event) => {
     event.preventDefault();
     //   ^[1-9][0-9]*$
@@ -25,6 +31,15 @@ export default function Settings() {
           type="number"
           placeholder="Set your Task time"
           onChange={(e) => setInitialMin(e.currentTarget.value)}
+        ></input>
+        <h1 className={s.settingsTitle}>
+          Please, set a break time before next task
+        </h1>
+        <input
+          className={s.input}
+          type="number"
+          placeholder="Set your Break time"
+          onChange={(e) => setInitialBreakMin(e.currentTarget.value)}
         ></input>
         <NavLink to="/" exact>
           <button className={s.setBtn} type="submit">
