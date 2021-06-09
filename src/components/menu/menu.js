@@ -24,6 +24,7 @@ export default function Menu({ active, setActive }) {
             <li className={s.menuItem}>
               <NavLink
                 to="/tasks"
+                exact
                 className={s.menuLink}
                 onClick={() => setActive(false)}
               >

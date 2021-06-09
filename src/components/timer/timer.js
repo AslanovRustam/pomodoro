@@ -20,12 +20,10 @@ export default function Timer({ currentItem = false }) {
   const localBreakMinutes = window.localStorage.getItem("break");
   const parsedBreakMinutes = JSON.parse(localBreakMinutes);
   const [breakMinutes, setBreakMinutes] = useState(
-    parsedBreakMinutes ? parsedBreakMinutes : 2
+    parsedBreakMinutes ? parsedBreakMinutes : 5
   );
-  // const [breakSeconds, setBreakSeconds] = useState(0);
-
   const [initialBreakMin] = useState(
-    parsedBreakMinutes ? parsedBreakMinutes : 2
+    parsedBreakMinutes ? parsedBreakMinutes : 5
   );
 
   const start = () => {
@@ -36,13 +34,10 @@ export default function Timer({ currentItem = false }) {
 
   let updatedS = seconds;
   let updatedM = minutes;
-
   let updatedBreakM = breakMinutes;
-  // let updatedBreakS = breakSeconds;
 
   const run = () => {
     if (updatedS === 0) {
-      // setStatus(1);
       updatedM--;
       updatedS = 60;
     }
@@ -51,36 +46,14 @@ export default function Timer({ currentItem = false }) {
       clearInterval(interv);
       setMinutes(updatedBreakM);
       setBreakMinutes(minutes);
-      // console.log("minutes", minutes);
-      // console.log("updatedBreakM", updatedBreakM);
-      // console.log("updatedM", updatedM);
       return;
     }
     updatedS--;
     return setMinutes(updatedM), setSeconds(updatedS);
   };
 
-  // const run = () => {
-  //   if (updatedS === 0) {
-  //     // setStatus(1);
-  //     updatedM--;
-  //     updatedS = 60;
-  //   }
-  //   if (updatedM === -1) {
-  //     setStatus(3);
-  //     clearInterval(interv);
-  //     setMinutes(updatedBreakM);
-  //     setBreakMinutes(minutes);
-  //     return;
-  //   }
-  //   updatedS--;
-  //   return setMinutes(updatedM), setSeconds(updatedS);
-  // };
-
   const stop = () => {
     clearInterval(interv);
-    // setInterv();
-
     setStatus(2);
   };
 
@@ -112,6 +85,8 @@ export default function Timer({ currentItem = false }) {
               Add Task
             </NavLink>
             <div className={s.timerCotainer}>
+              {status === 3 ? <h1 className={s.didIt}>Well done!</h1> : ""}
+
               <div className={s.timerProgressContainer}>
                 <CircularProgressbar
                   value={minutes}
@@ -132,7 +107,6 @@ export default function Timer({ currentItem = false }) {
                   }`}
                 />
               </div>
-              {status === 3 ? <h1 className={s.didIt}>Well done!</h1> : ""}
               <div className={s.timerBtnContainer}>
                 {status === 0 ? (
                   <div>

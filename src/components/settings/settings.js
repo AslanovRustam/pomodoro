@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./settings.module.css";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Settings() {
@@ -17,8 +18,36 @@ export default function Settings() {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    //   ^[1-9][0-9]*$
   };
+
+  const handleChangeMinutes = (e) => {
+    let onlyNumbers = /^[1-9][0-9]*$/.test(e.currentTarget.value);
+    if (!onlyNumbers) {
+      notify();
+    } else {
+      setInitialMin(e.currentTarget.value);
+    }
+  };
+
+  const handleChangeBreak = (e) => {
+    let onlyNumbers = /^[1-9][0-9]*$/.test(e.currentTarget.value);
+    if (!onlyNumbers) {
+      notify();
+    } else {
+      setInitialBreakMin(e.currentTarget.value);
+    }
+  };
+
+  const notify = () =>
+    toast.error("Please, use only numbers", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   return (
     <>
@@ -30,7 +59,7 @@ export default function Settings() {
           className={s.input}
           type="number"
           placeholder="Set your Task time"
-          onChange={(e) => setInitialMin(e.currentTarget.value)}
+          onChange={handleChangeMinutes}
         ></input>
         <h1 className={s.settingsTitle}>
           Please, set a break time before next task
@@ -39,7 +68,7 @@ export default function Settings() {
           className={s.input}
           type="number"
           placeholder="Set your Break time"
-          onChange={(e) => setInitialBreakMin(e.currentTarget.value)}
+          onChange={handleChangeBreak}
         ></input>
         <NavLink to="/" exact>
           <button className={s.setBtn} type="submit">
@@ -47,6 +76,17 @@ export default function Settings() {
           </button>
         </NavLink>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 }

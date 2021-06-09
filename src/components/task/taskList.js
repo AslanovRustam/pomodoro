@@ -3,10 +3,8 @@ import { NavLink, Link } from "react-router-dom";
 import s from "./task.module.css";
 import Modal from "../modal/modal";
 import initialTasks from "../tasks.json";
-import shortid from "shortid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Task from "./task";
 
 export default function TaskList() {
   const [name, setName] = useState("");
@@ -16,7 +14,6 @@ export default function TaskList() {
 
   const localTasks = window.localStorage.getItem("tasks");
   const parsedTasks = JSON.parse(localTasks);
-  console.log("parsedTasks", parsedTasks);
   const [tasks, setTasks] = useState(
     parsedTasks === null ? initialTasks : parsedTasks
   );
@@ -36,12 +33,6 @@ export default function TaskList() {
   const toggleModal = (task) => {
     setShowmodal(!showModal);
     setCurrentPost(task);
-    console.log("task in toggle", task);
-  };
-  const newTask = {
-    id: shortid.generate(),
-    name,
-    description,
   };
 
   const deleteTask = (taskId) => {
@@ -108,7 +99,6 @@ export default function TaskList() {
         <ul>
           {tasks.map((task) => (
             <li key={task.id} className={s.taskContainer}>
-              {/* <Task currentItem={task} toggleCompleted={toggleCompleted} /> */}
               <div className={s.taskInfo}>
                 <div>
                   <h1 className={s.taskName}>{task.name}</h1>
@@ -121,7 +111,7 @@ export default function TaskList() {
                     checked={task.checked}
                     onChange={() => toggleCompleted(task)}
                   />
-                  <Link to={`/tasks/${task.id}`} exact className={s.menuLink}>
+                  <Link to={`/tasks/${task.id}`} className={s.menuLink}>
                     <button className={s.startBtn} type="button">
                       Start
                     </button>

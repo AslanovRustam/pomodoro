@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./addtask.module.css";
-// import Modal from "../modal/modal";
-// import initialTasks from "../tasks.json";
 import shortid from "shortid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,11 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 export default function TaskList() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [currentPost, setCurrentPost] = useState("");
 
   const localTasks = window.localStorage.getItem("tasks");
   const parsedTasks = JSON.parse(localTasks);
-  console.log("currentPost", currentPost);
   const [tasks, setTasks] = useState(parsedTasks);
   window.localStorage.setItem("tasks", JSON.stringify(tasks));
 
