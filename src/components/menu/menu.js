@@ -13,7 +13,7 @@ export default function Menu({ active, setActive }) {
           <ul className={s.menuList}>
             <li className={s.menuItem}>
               <NavLink
-                to="/"
+                to="/pomodoro"
                 exact
                 className={s.menuLink}
                 onClick={() => setActive(false)}

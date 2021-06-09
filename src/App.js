@@ -12,7 +12,7 @@ function App() {
     <>
       <Header />
       <Switch>
-        <Route path="/" exact>
+        <Route path="/pomodoro" exact>
           <Timer />
         </Route>
         <Route path="/addtask">

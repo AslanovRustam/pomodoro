@@ -70,7 +70,7 @@ export default function Settings() {
           placeholder="Set your Break time"
           onChange={handleChangeBreak}
         ></input>
-        <NavLink to="/" exact>
+        <NavLink to="/pomodoro" exact>
           <button className={s.setBtn} type="submit">
             Set
           </button>

@@ -48,7 +48,7 @@ export default function TaskList() {
       <div className={s.taskListContainer}>
         <div className={s.addTaskContainer}>
           <div className={s.navContainer}>
-            <NavLink to="/" exact>
+            <NavLink to="/pomodoro" exact>
               <button className={s.backBtn} type="button">
                 Home
               </button>

@@ -73,7 +73,7 @@ export default function Timer({ currentItem = false }) {
         {currentItem.checked ? (
           <>
             <h1 className={s.didIt}>Great job! You did it!</h1>
-            <NavLink to="/" exact>
+            <NavLink to="/pomodoro" exact>
               <button className={s.backBtn} type="button">
                 Back to Home
               </button>
